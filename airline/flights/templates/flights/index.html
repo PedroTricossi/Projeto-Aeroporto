@@ -1,0 +1,33 @@
+{% extends "flights/base.html" %}
+
+{% block title %}
+    voos
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row align-items-start">
+
+          <div class="col">
+          </div>
+
+          <div class="col">
+            <h1>Lista de voos:</h1>
+          </div>
+          
+          <div class="col">
+          </div>
+        </div>
+
+        <div class="row align-items-center">
+          <div class="col">
+            {% for flight in flights %}
+                <li>
+                    <a href="{% url 'flight' flight.id %}">
+                        Flight #{{ flight.id }}: {{ flight.origin }} to {{ flight.destination }}
+                    </a>
+                </li>
+            {% endfor %}
+          </div>
+        </div>
+{% endblock %}

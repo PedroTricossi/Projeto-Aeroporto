@@ -1,0 +1,74 @@
+{% extends "flights/base.html" %}
+
+{% block title %}
+    Flight {{ flight.id }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row align-items-start">
+          <div class="col">
+          </div>
+
+          <div class="col">
+            <h1>Detalhes do voo {{ flight.id }}:</h1>
+          </div>
+
+          <div class="col">
+          </div>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col">
+                <ul>
+                    <li><h6>Número do voo: {{ flight.id }}</h6></li>
+                    <li><h6>Origem: {{ flight.origin }}</h6></li>
+                    <li><h6>Destino:  {{ flight.destination }}</h6></li>
+                    <li><h6>Conexão:  {{ flight.stop }}</h6></li>
+
+                    <li>
+                        <h6>Passageiros no voo:</h6>
+                        <ul>
+                            {% for passenger in passengers %}
+                                <a href="{% url 'passenger' passenger.id %}">
+                                    <li>{{ passenger }}</li>   
+                                </a>
+                            {% empty %}
+                            <li>Sem Passageiros</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row align-items-end">
+            <div class="col">
+                {% if non_passengers %}
+                    <h2>Adicionar novo passageiro:</h2>
+
+                    <form action="{% url 'book' flight.id %}" method="post">
+                        {% csrf_token %}
+                        
+                        <div class="form-row">
+                            <div class="form-group col-md-9">
+                                <label for="exampleFormControlSelect1">Passageiros que não estão no voo:</label>
+                                <select class="form-control" name="passenger" >
+                                    {% for passenger in non_passengers %}
+                                    <option value="{{ passenger.id }}">{{ passenger }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit " class="btn btn-success btn-sm" class="">enviar</button>
+                    </form>
+                {% else %}
+                    <div>No passengers to add.</div>
+                {% endif %}
+
+                <a href="{% url 'index' %}">Voltar a pagina de voos</a>
+
+            </div>
+        </div>
+      </div>
+{% endblock %}

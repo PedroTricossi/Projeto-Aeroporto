@@ -1,0 +1,43 @@
+{% extends "flights/base.html" %}
+
+{% block title %}
+    Passageiros
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-1">
+        </div>
+        <div class="col-md-auto">
+            <h1>Detalhes sobre o passageiro: {{ passengers.first }}  {{passengers.last}}</h1>
+        </div>
+        <div class="col col-lg-1">
+        </div>
+      </div>
+    <div class="row align-items-center">
+        <div class="col">
+            <ul>
+                <li><h6>Primeiro nome: {{ passengers.first }}</h6></li>
+                <li><h6>Ultimo nome: {{ passengers.last }}</h6></li>
+                <li><h6>Sexo:  {{ passengers.sex }}</h6></li>
+                <li><h6>idade:  {{ passengers.age }}</h6></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row align-items-end">
+        <div class="col">
+
+            <a href="{% url 'index' %}">Voltar a pagina de voos</a>
+
+        </div>
+    </div>
+  </div>
+
+
+        </div>
+    </div>
+  </div>
+
+{% endblock %}
